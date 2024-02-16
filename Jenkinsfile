@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Git Checkout') {
             steps {
-                echo 'Hello World'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kabandr/end-to-end-jenkins.git'
             }
         }
     }
