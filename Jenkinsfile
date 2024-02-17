@@ -13,7 +13,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                    script {
+                    nodejs('nodejs LTS') {
                         sh 'npm install'
                     }
             }
