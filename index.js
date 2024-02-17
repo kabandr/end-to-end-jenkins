@@ -1,7 +1,6 @@
 import express from 'express';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import winston from 'winston';
-import books from './books';
+import books from './books.js';
 
 const app = express();
 const port = 3000;
