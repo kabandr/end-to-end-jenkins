@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import app from './index.js';
+import app from './index';
 
 describe('GET', () => {
   it('should return "Hello World!"', async () => {
@@ -18,7 +18,6 @@ describe('GET', () => {
     expect(response.status).to.equal(404);
   });
 });
-
 
 describe('GET /books', () => {
   it('should return status code 200', async () => {
@@ -45,7 +44,7 @@ describe('GET /books', () => {
     expect(response.status).to.equal(200);
     expect(response.body).to.be.an('array');
     // Check if the response body contains the expected book
-    const returnedBook = response.body.find(book => book.id === expectedBook.id);
+    const returnedBook = response.body.find((book) => book.id === expectedBook.id);
     expect(returnedBook).to.deep.equal(expectedBook);
   });
 });
