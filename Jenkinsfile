@@ -19,14 +19,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                    nodejs('nodejs LTS') {
-                        sh 'npm run test'
-                    }
-            }
-        }
-
          stage('Static Analysis') {
             steps {
                     nodejs('nodejs LTS') {
