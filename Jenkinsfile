@@ -21,7 +21,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                    nodejs {
+                    nodejs('nodejs LTS') {
                         sh 'npm run test'
                     }
             }
