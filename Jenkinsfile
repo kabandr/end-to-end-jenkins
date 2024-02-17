@@ -26,5 +26,13 @@ pipeline {
                     }
             }
         }
+
+         stage('Static Analysis') {
+            steps {
+                    nodejs('nodejs LTS') {
+                        sh 'npm run lint'
+                    }
+            }
+        }
     }
 }
