@@ -2,9 +2,12 @@ pipeline {
     agent any
 
     environment {
-        PATH = "${tool 'NodeJS'}/bin:${env.PATH}"
         DOCKER_USERNAME = "${secrets.DOCKER_USERNAME}"
         DOCKER_PASSWORD = "${secrets.DOCKER_PASSWORD}"
+    }
+
+    tools {
+        nodejs 'nodejs LTS'
     }
 
     stages {
@@ -19,17 +22,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
 
         stage('Static Analysis') {
             steps {
-                script {
-                    sh 'npm run lint'
-                }
+                sh 'npm run lint'
             }
         }
 
