@@ -27,16 +27,10 @@ pipeline {
             }
         }
 
-        // stage('Build and Push Docker Image') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
-        //                 def imageName = 'kabandr/demo-app:latest'
-        //                 docker.build(imageName, '.')
-        //                 docker.image(imageName).push()
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t kabandr/demo-app .'
+            }
+        }
     }
 }
