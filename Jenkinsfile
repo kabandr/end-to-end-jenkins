@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         PATH = "${tool 'NodeJS'}/bin:${env.PATH}"
-        DOCKER_USERNAME = "${ { secrets.DOCKER_USERNAME } }"
-        DOCKER_PASSWORD = "${ { secrets.DOCKER_PASSWORD } }"
+        DOCKER_USERNAME = "${{ secrets.DOCKER_USERNAME }}"
+        DOCKER_PASSWORD = "${{ secrets.DOCKER_PASSWORD }}"
     }
 
     stages {
