@@ -27,9 +27,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Docker Build & Push to Registry') {
             steps {
-                sh 'docker build -t kabandr/demo-app .'
+                script {
+                    withDockerRegistry(credentialsId: 'docker-credentials-id', toolName: 'Docker') {
+                        def imageName = 'kabandr/demo-app:latest'
+                        docker.build(imageName, '.')
+                        docker.image(imageName).push()
+                    }
+                }
             }
         }
     }
