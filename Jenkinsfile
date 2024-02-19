@@ -30,9 +30,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    withDockerContainer(image: '', toolName: 'Docker') {
-                        sh 'docker build -t kabandr/demo-app .'
-                    }
+                    sh 'docker build -t kabandr/demo-app .'
                 }
             }
         }
