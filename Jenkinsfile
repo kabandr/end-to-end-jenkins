@@ -27,16 +27,20 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push to Registry') {
-            steps {
-                script {
-                    withDockerRegistry(credentialsId: 'docker-credentials-id', toolName: 'Docker') {
-                        def imageName = 'kabandr/demo-app:latest'
-                        docker.build(imageName, '.')
-                        docker.image(imageName).push()
-                    }
-                }
-            }
+        stage('Build image') {
+            app = docker.build('kabandr/demo-app')
         }
+
+        // stage('Docker Build & Push to Registry') {
+        //     steps {
+        //         script {
+        //             withDockerRegistry(credentialsId: 'docker-credentials-id', toolName: 'Docker') {
+        //                 def imageName = 'kabandr/demo-app:latest'
+        //                 docker.build(imageName, '.')
+        //                 docker.image(imageName).push()
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
