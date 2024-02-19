@@ -27,20 +27,27 @@ pipeline {
             }
         }
 
-        stage('Build image') {
+        stage('Build Image') {
             app = docker.build('kabandr/demo-app')
         }
 
-        // stage('Docker Build & Push to Registry') {
-        //     steps {
-        //         script {
-        //             withDockerRegistry(credentialsId: 'docker-credentials-id', toolName: 'Docker') {
-        //                 def imageName = 'kabandr/demo-app:latest'
-        //                 docker.build(imageName, '.')
-        //                 docker.image(imageName).push()
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push Image') {
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials-id') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push('latest')
+            }
+        }
+
+    // stage('Docker Build & Push to Registry') {
+    //     steps {
+    //         script {
+    //             withDockerRegistry(credentialsId: 'docker-credentials-id', toolName: 'Docker') {
+    //                 def imageName = 'kabandr/demo-app:latest'
+    //                 docker.build(imageName, '.')
+    //                 docker.image(imageName).push()
+    //             }
+    //         }
+    //     }
+    // }
     }
 }
