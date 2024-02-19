@@ -27,33 +27,11 @@ pipeline {
             }
         }
 
-        stage('Build Image') {
+        stage('Docker Build') {
+            agent any
             steps {
-                app = docker.build('kabandr/demo-app')
+                sh 'docker build -t kabandr/demo-app .'
             }
         }
-
-        stage('Push Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials-id') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push('latest')
-                    }
-                }
-            }
-        }
-
-    // stage('Docker Build & Push to Registry') {
-    //     steps {
-    //         script {
-    //             withDockerRegistry(credentialsId: 'docker-credentials-id', toolName: 'Docker') {
-    //                 def imageName = 'kabandr/demo-app:latest'
-    //                 docker.build(imageName, '.')
-    //                 docker.image(imageName).push()
-    //             }
-    //         }
-    //     }
-    // }
     }
 }
