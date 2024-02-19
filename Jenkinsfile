@@ -28,9 +28,12 @@ pipeline {
         }
 
         stage('Docker Build') {
-            agent any
             steps {
-                sh 'docker build -t kabandr/demo-app .'
+                script {
+                    withDockerContainer(image: '', toolName: 'Docker') {
+                        sh 'docker build -t kabandr/demo-app .'
+                    }
+                }
             }
         }
     }
