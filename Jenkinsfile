@@ -28,13 +28,19 @@ pipeline {
         }
 
         stage('Build Image') {
-            app = docker.build('kabandr/demo-app')
+            steps {
+                app = docker.build('kabandr/demo-app')
+            }
         }
 
         stage('Push Image') {
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials-id') {
-                app.push("${env.BUILD_NUMBER}")
-                app.push('latest')
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials-id') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push('latest')
+                    }
+                }
             }
         }
 
