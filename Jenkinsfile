@@ -54,9 +54,12 @@ pipeline {
         }
 
         stage('Deploy to EKS') {
+            environment {
+                SERVER_URL = credentials('cluster-url')
+            }
             steps {
-                script {
-                    sh 'kubectl apply -f deployment.yaml'
+                kubeconfig(credentialsId: 'cluster-credentials-id', serverUrl: "${SERVER_URL}") {
+                    sh 'kubectl apply -f kube/deployment.yaml'
                     sh 'kubectl rollout status deployment/demo-deployment'
                 }
             }
