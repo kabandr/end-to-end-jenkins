@@ -55,14 +55,18 @@ pipeline {
 
         stage('Deploy to EKS') {
             environment {
-                SERVER_URL = credentials('cluster-url')
+                SERVER_URL = credentials('cluster-url').url
+                CA_CERT = credentials('caCertificate').secret
             }
             steps {
-                kubeconfig(credentialsId: 'cluster-credentials-id', serverUrl: "${SERVER_URL}") {
-                    sh 'kubectl apply -f kube/deployment.yaml'
-                    sh 'kubectl rollout status deployment/demo-deployment'
+                withCredentials([file(credentialsId: 'cluster-credentials-id', variable: 'KUBECONFIG_FILE'), string(credentialsId: 'caCertificate', variable: 'CA_CERT')]) {
+                    sh 'export KUBECONFIG=$KUBECONFIG_FILE'
+                    kubeconfig(credentialsId: 'cluster-credentials-id', serverUrl: "${SERVER_URL}", caCertificate: "${CA_CERT}") {
+                        sh 'kubectl get pods'
+                        sh 'kubectl apply -f kube/deployment.yaml'
+                        sh 'kubectl rollout status deployment/demo-deployment'
+                    }
                 }
             }
         }
     }
-}
