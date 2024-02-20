@@ -59,12 +59,14 @@ pipeline {
                 CA_CERT = credentials('caCertificate').secret
             }
             steps {
-                withCredentials([file(credentialsId: 'cluster-credentials-id', variable: 'KUBECONFIG_FILE'), string(credentialsId: 'caCertificate', variable: 'CA_CERT')]) {
-                    sh 'export KUBECONFIG=$KUBECONFIG_FILE'
-                    kubeconfig(credentialsId: 'cluster-credentials-id', serverUrl: "${SERVER_URL}", caCertificate: "${CA_CERT}") {
-                        sh 'kubectl get pods'
-                        sh 'kubectl apply -f kube/deployment.yaml'
-                        sh 'kubectl rollout status deployment/demo-deployment'
+                script {
+                    withCredentials([file(credentialsId: 'cluster-credentials-id', variable: 'KUBECONFIG_FILE'), string(credentialsId: 'caCertificate', variable: 'CA_CERT')]) {
+                        sh 'export KUBECONFIG=$KUBECONFIG_FILE'
+                        kubeconfig(credentialsId: 'cluster-credentials-id', serverUrl: "${SERVER_URL}", caCertificate: "${CA_CERT}") {
+                            sh 'kubectl get pods'
+                            sh 'kubectl apply -f kube/deployment.yaml'
+                            sh 'kubectl rollout status deployment/demo-deployment'
+                        }
                     }
                 }
             }
