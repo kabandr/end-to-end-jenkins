@@ -17,44 +17,44 @@ This project is a demo for an End-To-End CI/CD using Jenkins. It includes the ne
 
 ## Installation
 
-## For a step by step installation:
+### For a step by step installation:
 
-1. Clone the Repository: Clone the repository to your local machine.
+1. Clone the Repository
 
 ```
 git clone https://github.com/kabandr/end-to-end-jenkins.git
 ```
 
-2. Navigate to the Project Directory: Change into the project directory.
+2. Navigate to the Project Directory
 ```
 cd end-to-end-jenkins
 ```
-3. Install Node.js Dependencies: Use npm to install the Node.js dependencies.
+3. Install Node.js Dependencies
 
 ```
 npm install
 ```
 
-4. Build the Docker Image: Build the Docker image for the demo application.
+4. Build the Docker Image
 ```
 docker build -t <your-dockerhub-username>/demo-app .
 ```
 
-5. Log in to Docker Registry: Log in to Docker Hub to push the Docker image.
+5. Log in to Docker Registry
+
 ```
 docker login -u DOCKERHUB_USERNAME -p DOCKERHUB_PASSWORD
 ```
+Replace DOCKERHUB_USERNAME and DOCKERHUB_PASSWORD with your Docker Hub credentials.
 
-6. Replace DOCKERHUB_USERNAME and DOCKERHUB_PASSWORD with your Docker Hub credentials.
 
-
-7. Push the Docker Image to Registry: Push the Docker image to your Docker Hub repository.
+6. Push the Docker Image to Registry: Push the Docker image to your Docker Hub repository.
 
 ```
 docker push <your-dockerhub-username>/demo-app
 ```
 
-8. Create Kubernetes Cluster
+7. Create Kubernetes Cluster
 
 For EKS, run this command in the root folder:
 
@@ -68,7 +68,7 @@ For OKE, run this command in the root folder:
 oci ce cluster create --config-file oke-cluster.yaml
 ```
 
-9. Deploy to Kubernetes (EKS): Apply the Kubernetes deployment configuration to your EKS cluster.
+8. Deploy to Kubernetes (EKS)
 
 ```
 kubectl apply -f deployment.yaml
@@ -87,15 +87,15 @@ The app is a basic express API with 2 endpoints:
 
 The project includes the following files:
 
-- **books.js**: JavaScript file containing bookstore functionality.
-- **deployment.yaml**: Kubernetes deployment configuration for the demo application.
-- **docker-compose.yml**: Docker Compose configuration (if applicable).
+- **books.js**: JavaScript file .
+- **deployment.yaml**: Kubernetes deployment configuration for our application.
+- **docker-compose.yml**: Docker Compose configuration (if needed).
 - **Dockerfile**: Dockerfile for building the Docker image.
-- **eks-cluster.yaml**: EKS cluster configuration (if applicable).
-- **index.js**: Main entry point for the demo application.
+- **eks-cluster.yaml**: EKS cluster configuration.
+- **index.js**: Main entry point for our demo app. Contains our API functionality.
 - **Jenkinsfile**: Jenkins pipeline configuration for CI/CD.
 - **LICENSE**: License file for the project.
-- **oke-cluster.yaml**: Oracle Kubernetes Engine cluster configuration (if applicable).
+- **oke-cluster.yaml**: Oracle Kubernetes Engine cluster configuration (if preferred).
 - **package.json**: Node.js package configuration file.
 - **package-lock.json**: npm package lock file.
 - **README.md**: Documentation file (this file).
