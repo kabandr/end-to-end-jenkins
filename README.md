@@ -82,21 +82,3 @@ The app is a basic express API with 2 endpoints:
 <PUBLIC_IP>/            # Returns a string "Hello World!
 <PUBLIC_IP>/books  # Returns a json object with an array of books
 ```
-
-## Files
-
-The project includes the following files:
-
-- **books.js**: JavaScript file .
-- **deployment.yaml**: Kubernetes deployment configuration for our application.
-- **docker-compose.yml**: Docker Compose configuration (if needed).
-- **Dockerfile**: Dockerfile for building the Docker image.
-- **eks-cluster.yaml**: EKS cluster configuration.
-- **index.js**: Main entry point for our demo app. Contains our API functionality.
-- **Jenkinsfile**: Jenkins pipeline configuration for CI/CD.
-- **LICENSE**: License file for the project.
-- **oke-cluster.yaml**: Oracle Kubernetes Engine cluster configuration (if preferred).
-- **package.json**: Node.js package configuration file.
-- **package-lock.json**: npm package lock file.
-- **README.md**: Documentation file (this file).
-- **test.js**: Test file for the demo application.
