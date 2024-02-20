@@ -34,5 +34,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Push to Registry') {
+            steps {
+                script {
+                    sh 'docker push kabandr/demo-app'
+                }
+            }
+        }
     }
 }
